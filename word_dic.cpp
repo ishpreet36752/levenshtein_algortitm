@@ -1,0 +1,71 @@
+#include "word_dic.h"
+#include <algorithm>
+
+std::vector<std::string> getDictionary() {
+    std::vector<std::string> dictionary = {
+        "the", "be", "to", "of", "and", "a", "in", "that", "have", "i", "it", "for", "not", "on", "with",
+        "he", "as", "you", "do", "at", "this", "but", "his", "by", "from", "they", "we", "say", "her",
+        "she", "or", "an", "will", "my", "one", "all", "would", "there", "their", "what", "so", "up",
+        "out", "if", "about", "who", "get", "which", "go", "me", "when", "make", "can", "like", "time",
+        "no", "just", "him", "know", "take", "people", "into", "year", "your", "good", "some", "could",
+        "them", "see", "other", "than", "then", "now", "look", "only", "come", "its", "over", "think",
+        "also", "back", "after", "use", "two", "how", "our", "work", "first", "well", "way", "even",
+        "new", "want", "because", "any", "these", "give", "day", "most", "us", "is", "are", "was",
+        "were", "been", "has", "had", "being", "may", "such", "here", "those", "both", "own", "why",
+        "same", "another", "while", "where", "much", "before", "great", "through", "never", "under",
+        "many", "must", "should", "too", "very", "might", "still", "against", "between", "without",
+        "again", "during", "above", "below", "since", "until", "least", "around", "although", "though",
+        "whether", "among", "toward", "within", "better", "enough", "nothing", "everything", "something",
+        "everyone", "someone", "anyone", "each", "few", "more", "different", "several", "least", "able",
+        "actually", "afterwards", "ain't", "almost", "alone", "alongside", "already", "always", "am",
+        "amid", "amongst", "anybody", "anyhow", "anyways", "anywhere", "aside", "asking", "available",
+        "away", "awfully", "backward", "backwards", "became", "become", "becomes", "beforehand", "begin",
+        "behind", "beneath", "beside", "besides", "best", "brief", "came", "cannot", "cant", "cause",
+        "causes", "certain", "certainly", "changes", "clearly", "c'mon", "come", "comes", "consider",
+        "considering", "contain", "containing", "contains", "corresponding", "couldn't", "currently",
+        "dare", "daren't", "definitely", "despite", "didn't", "directly", "doesn't", "doing", "done",
+        "don't", "downwards", "edu", "eg", "either", "else", "elsewhere", "end", "ending", "entirely",
+        "especially", "etc", "ever", "evermore", "every", "everybody", "everywhere", "ex", "exactly",
+        "example", "except", "fairly", "far", "farther", "fifth", "five", "followed", "following",
+        "follows", "forever", "former", "formerly", "forth", "forward", "found", "four", "further",
+        "furthermore", "gets", "getting", "given", "gives", "goes", "going", "gone", "got", "gotten",
+        "greetings", "hadn't", "half", "happens", "hardly", "hasn't", "haven't", "having", "he'd",
+        "he'll", "hello", "help", "hence", "hereafter", "hereby", "herein", "here's", "hereupon",
+        "hers", "herself", "he's", "hi", "himself", "hither", "hopefully", "howbeit", "however",
+        "hundred", "i'd", "ie", "if", "ignored", "i'll", "i'm", "immediate", "inasmuch", "inc", "indeed",
+        "indicate", "indicated", "indicates", "inner", "inside", "insofar", "instead", "inward",
+        "isn't", "it'd", "it'll", "it's", "itself", "i've", "keep", "keeps", "kept", "known", "knows",
+        "last", "lately", "later", "latter", "latterly", "lest", "let", "let's", "liked", "likely",
+        "likewise", "little", "looking", "looks", "low", "lower", "ltd", "mainly", "makes", "maybe",
+        "mayn't", "meantime", "meanwhile", "merely", "mightn't", "mine", "minus", "miss", "moreover",
+        "mostly", "mr", "mrs", "mustn't", "myself", "namely", "nd", "nearly", "necessary", "need",
+        "needn't", "needs", "neither", "neverf", "neverless", "nevertheless", "next", "nine", "ninety",
+        "nobody", "non", "none", "nonetheless", "noone", "no-one", "normally", "notwithstanding",
+        "novel", "nowhere", "obviously", "often", "oh", "ok", "okay", "old", "once", "ones", "one's",
+        "onto", "opposite", "others", "otherwise", "ought", "oughtn't", "ours", "ourselves", "outside",
+        "overall", "particular", "particularly", "per", "perhaps", "placed", "please", "plus",
+        "possible", "presumably", "probably", "provided", "provides", "que", "quite", "rather", "rd",
+        "re", "really", "reasonably", "recent", "recently", "regardless", "regards", "relatively",
+        "respectively", "right", "round", "said", "saw", "saying", "says", "second", "secondly",
+        "seeing", "seem", "seemed", "seeming", "seems", "seen", "self", "selves", "sensible", "sent",
+        "serious", "seriously", "seven", "shall", "shan't", "she'd", "she'll", "she's", "shouldn't",
+        "six", "someday", "somehow", "sometime", "sometimes", "somewhat", "somewhere", "soon", "sorry",
+        "specified", "specify", "specifying", "sub", "sup", "sure", "taken", "taking", "tell", "tends",
+        "th", "thanx", "that'll", "thats", "that's", "that've", "thereafter", "thereby", "there'd",
+        "therefore", "therein", "there'll", "there're", "theres", "there's", "thereupon", "there've",
+        "thence", "thorough", "thoroughly", "third", "thirty", "thru", "thus", "till", "together",
+        "took", "towards", "tried", "tries", "truly", "try", "trying", "t's", "twice", "un", "undoing",
+        "unfortunately", "unless", "unlike", "unlikely", "unto", "upwards", "used", "useful", "uses",
+        "using", "usually", "v", "value", "various", "versus", "via", "viz", "vs", "wants", "wasn't",
+        "we'd", "welcome", "we'll", "went", "weren't", "we're", "we've", "whatever", "what'll", "what's",
+        "what've", "whence", "whenever", "whereafter", "whereas", "whereby", "wherein", "where's",
+        "whereupon", "wherever", "whichever", "whilst", "whither", "who'd", "whoever", "whole", "who'll",
+        "whomever", "who's", "whose", "willing", "wish", "wonder", "won't", "wouldn't", "yes", "yet",
+        "you'd", "you'll", "you're", "yours", "yourself", "yourselves", "you've", "zero"
+    };
+    
+    // Sort for consistent results
+    std::sort(dictionary.begin(), dictionary.end());
+    return dictionary;
+}
+
