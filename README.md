@@ -41,11 +41,110 @@ explanations and visualizations.
 
 ## Task Implementations
 
-### Task 1 (Recursive): Basic Edit Distance with Recursion
-- **File:** `task1_rec.cpp`
-- **Time Complexity:** O(3^(m+n))
-- **Space Complexity:** O(m+n)
-- **How to run:**
-  ```bash
-  g++ -std=c++11 task1_rec.cpp -o task1_rec
-  ./task1_rec
+
+## Task 1 (DP): Basic Edit Distance with Dynamic Programming
+
+- **File:** `task1.cpp`
+- **Time Complexity:** O(m * n)
+- **Space Complexity:** O(m * n)
+
+**How to run:**
+
+```bash
+g++ -std=c++11 task1.cpp -o task1
+./task1
+```
+
+---
+
+## Task 2: Weighted Edit Distance
+
+- **File:** `task2.cpp`
+- **Time Complexity:** O(m * n)
+- **Space Complexity:** O(m * n)
+
+**How to run:**
+
+```bash
+g++ -std=c++11 task2.cpp -o task2
+./task2
+```
+
+---
+
+## Task 3: Spell Checker
+
+- **File:** `task3.cpp`
+- **Time Complexity:** O(k * m * n) (k = dictionary size)
+- **Space Complexity:** O(m * n)
+
+**How to run:**
+
+```bash
+g++ -std=c++11 task3.cpp -o task3
+./task3
+```
+
+---
+
+## Task 4: Space-Optimized Edit Distance
+
+- **File:** `task4.cpp`
+- **Time Complexity:** O(m * n)
+- **Space Complexity:** O(min(m, n))
+
+**How to run:**
+
+```bash
+g++ -std=c++11 task4.cpp -o task4
+./task4
+```
+
+---
+
+## Levenshtein Calculator (Comprehensive CLI)
+
+- **Files:**
+  - `levenshtein_calculator.cpp`
+  - `word_dic.h`
+  - `word_dic.cpp`
+
+**How to run:**
+
+```bash
+g++ -std=c++11 levenshtein_calculator.cpp word_dic.cpp -o calculator
+./calculator
+```
+
+**Features:**
+
+- Basic and weighted edit distance calculation
+- Matrix visualization
+- Step-by-step operation explanations
+- Spell checking with dictionary integration
+- Space optimization explanation
+
+---
+
+## Implementation Details
+
+The Levenshtein distance algorithm measures the minimum number of  
+single-character edits (insertions, deletions, or substitutions) required  
+to change one string into another. My implementations cover:
+
+- Recursive approach  
+- Dynamic programming  
+- Weighted operations  
+- Space optimization  
+- Dictionary-based spell checking
+
+---
+
+## Performance Comparison
+
+| Implementation     | Time Complexity | Space Complexity | Best Use Case                     |
+|--------------------|------------------|-------------------|-----------------------------------|
+| Recursive           | O(3^(m+n))       | O(m+n)            | Educational, very short strings   |
+| DP (Basic)          | O(m * n)         | O(m * n)          | General purpose                   |
+| DP (Weighted)       | O(m * n)         | O(m * n)          | Custom operation costs            |
+| DP (Optimized)      | O(m * n)         | O(min(m, n))      | Memory-constrained scenarios      |
