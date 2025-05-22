@@ -1,8 +1,7 @@
 // Task2 Minimum Weighted Edit Distance Calculation
-
 #include <bits/stdc++.h>
 using namespace std;
-int EditDistance(const string &s1, const string &s2, int Ci, int Cd, int Cs)
+int wegEditDistance(const string &s1, const string &s2, int Ci, int Cd, int Cs)
 {
     int m = s1.size();
     int n = s2.size();
@@ -39,16 +38,16 @@ int main()
 
     
     cout << "Test Case 1: 'kitten' -> 'sitting', Ci=1, Cd=2, Cs=3" << endl;
-    cout << "Expected: 7, Got: " << EditDistance(a1, b1, 1, 2, 3) << endl
+    cout << "Expected: 7, Got: " << wegEditDistance(a1, b1, 1, 2, 3) << endl
          << endl;
 
     cout << "Test Case 2: 'flaw' -> 'lawn', Ci=2, Cd=2, Cs=1" << endl;
-    cout << "Expected: 4, Got: " << EditDistance(a2, b2, 2, 2, 1) << endl
+    cout << "Expected: 4, Got: " << wegEditDistance(a2, b2, 2, 2, 1) << endl
          << endl;
 
 
     cout << "Test Case 3: 'algorithm' -> 'logarithm', Ci=1, Cd=3, Cs=2" << endl;
-    cout << "Expected: 6, Got: " << EditDistance(a3, b3, 1, 3, 2) << endl
+    cout << "Expected: 6, Got: " << wegEditDistance(a3, b3, 1, 3, 2) << endl
          << endl;
 
     string s1, s2;
@@ -56,7 +55,7 @@ int main()
     cout << "\nEnter s1, s2 and costs Ci Cd Cs: ";
     if (cin >> s1 >> s2 >> Ci >> Cd >> Cs)
     {
-        cout << "Edit Distance: " << EditDistance(s1, s2, Ci, Cd, Cs) << endl;
+        cout << "Edit Distance: " << wegEditDistance(s1, s2, Ci, Cd, Cs) << endl;
     }
     return 0;
 }
