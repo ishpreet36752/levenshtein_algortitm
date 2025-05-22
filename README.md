@@ -87,8 +87,8 @@ g++ -std=c++11 task4.cpp -o task4
 **How to run:**
 
 ```bash
-g++ -std=c++11 levenshtein_calculator.cpp word_dic.cpp -o calculator
-./calculator
+g++ -std=c++11 levenshtein_calculator.cpp word_dic.cpp -o program
+./program
 ```
 
 **Features:**
