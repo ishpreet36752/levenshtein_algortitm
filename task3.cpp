@@ -33,7 +33,6 @@ vector<string> spellCheck(const string &word, const vector<string> &dict, int ci
 }
 
 int main() {
-    // Test Case from PDF
     vector<string> dict = {"cred", "bet", "shat", "that", "brad", "cart", "brat", "card"};
     string word = "dat";
     int ci=1, cd=1, cs=1, maxDist=2;
@@ -44,7 +43,6 @@ int main() {
     for(const auto &w : suggestions) cout << w << " ";
     cout << "\n\n";
     
-    // Interactive Mode
     string userWord;
     int uCi, uCd, uCs, uMax = 2;
     cout << "Enter word to check: ";

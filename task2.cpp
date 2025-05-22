@@ -21,11 +21,8 @@ int EditDistance(const string &s1, const string &s2, int Ci, int Cd, int Cs)
     {
         for (int j = 1; j <= n; ++j)
         {
-
             dp[i][j] = min(dp[i][j], dp[i - 1][j] + Cd);
-
             dp[i][j] = min(dp[i][j], dp[i][j - 1] + Ci);
-
             int costSub = (s1[i - 1] == s2[j - 1]) ? 0 : Cs;
             dp[i][j] = min(dp[i][j], dp[i - 1][j - 1] + costSub);
         }
@@ -44,7 +41,6 @@ int main()
     cout << "Test Case 1: 'kitten' -> 'sitting', Ci=1, Cd=2, Cs=3" << endl;
     cout << "Expected: 7, Got: " << EditDistance(a1, b1, 1, 2, 3) << endl
          << endl;
-
 
     cout << "Test Case 2: 'flaw' -> 'lawn', Ci=2, Cd=2, Cs=1" << endl;
     cout << "Expected: 4, Got: " << EditDistance(a2, b2, 2, 2, 1) << endl

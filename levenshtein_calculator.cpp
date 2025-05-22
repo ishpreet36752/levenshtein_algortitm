@@ -1,20 +1,11 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include <algorithm>
-#include <iomanip>
-#include <limits>
+#include<bits/stdc++.h>
 #include "word_dic.h"
-
 using namespace std;
 
-// Basic edit distance calculation (unweighted)
-int edit_distance(const string &s1, const string &s2)
-{
+int edit_distance(const string &s1, const string &s2){
     int m = s1.length();
     int n = s2.length();
     vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
-
     for (int i = 0; i <= m; i++)
         dp[i][0] = i;
     for (int j = 0; j <= n; j++)
@@ -36,27 +27,24 @@ int edit_distance(const string &s1, const string &s2)
             }
         }
     }
-
     return dp[m][n];
 }
+
 int weighted_edit_distance(const string &s1, const string &s2, int ci, int cd, int cs, int threshold = -1)
 {
     int m = s1.length();
     int n = s2.length();
     vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
 
-    for (int i = 0; i <= m; i++)
-    {
+    for (int i = 0; i <= m; i++){
         dp[i][0] = i * cd;
     }
 
-    for (int j = 0; j <= n; j++)
-    {
+    for (int j = 0; j <= n; j++){
         dp[0][j] = j * ci;
     }
 
-    for (int i = 1; i <= m; i++)
-    {
+    for (int i = 1; i <= m; i++){
         int min_row = numeric_limits<int>::max();
         for (int j = 1; j <= n; j++)
         {
@@ -66,23 +54,20 @@ int weighted_edit_distance(const string &s1, const string &s2, int ci, int cd, i
             }
             else
             {
-                dp[i][j] = min({dp[i - 1][j] + cd,       // deletion
-                                dp[i][j - 1] + ci,       // insertion
-                                dp[i - 1][j - 1] + cs}); // substitution
+                dp[i][j] = min({dp[i - 1][j] + cd,    
+                                dp[i][j - 1] + ci,       
+                                dp[i - 1][j - 1] + cs}); 
             }
             min_row = min(min_row, dp[i][j]);
         }
 
-        if (threshold != -1 && min_row > threshold)
-        {
+        if (threshold != -1 && min_row > threshold){
             return numeric_limits<int>::max();
         }
     }
-
     return dp[m][n];
 }
 
-// Create weighted edit distance matrix for visualization
 vector<vector<int>> create_weighted_edit_distance_matrix(const string &s1, const string &s2, int ci, int cd, int cs)
 {
     int m = s1.length();
@@ -104,9 +89,9 @@ vector<vector<int>> create_weighted_edit_distance_matrix(const string &s1, const
             }
             else
             {
-                dp[i][j] = min({dp[i - 1][j] + cd,       // deletion
-                                dp[i][j - 1] + ci,       // insertion
-                                dp[i - 1][j - 1] + cs}); // substitution
+                dp[i][j] = min({dp[i - 1][j] + cd,       
+                                dp[i][j - 1] + ci,       
+                                dp[i - 1][j - 1] + cs}); 
             }
         }
     }
@@ -114,7 +99,6 @@ vector<vector<int>> create_weighted_edit_distance_matrix(const string &s1, const
     return dp;
 }
 
-// Generate explanation of operations
 vector<string> explain_edit_distance(const string &s1, const string &s2, int ci, int cd, int cs)
 {
     int m = s1.length();
@@ -122,57 +106,44 @@ vector<string> explain_edit_distance(const string &s1, const string &s2, int ci,
     vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
     vector<vector<vector<string>>> operations(m + 1, vector<vector<string>>(n + 1));
 
-    // Initialize first row and column
-    for (int i = 0; i <= m; i++)
-    {
+    for (int i = 0; i <= m; i++){
         dp[i][0] = i * cd;
         operations[i][0].clear();
-        for (int j = 0; j < i; j++)
-        {
+        for (int j = 0; j < i; j++){
             operations[i][0].push_back("Delete '" + string(1, s1[j]) + "'");
         }
     }
 
-    for (int j = 0; j <= n; j++)
-    {
+    for (int j = 0; j <= n; j++){
         dp[0][j] = j * ci;
         operations[0][j].clear();
-        for (int i = 0; i < j; i++)
-        {
+        for (int i = 0; i < j; i++){
             operations[0][j].push_back("Insert '" + string(1, s2[i]) + "'");
         }
     }
 
-    // Fill the DP table and track operations
-    for (int i = 1; i <= m; i++)
-    {
-        for (int j = 1; j <= n; j++)
-        {
-            if (s1[i - 1] == s2[j - 1])
-            {
+    for (int i = 1; i <= m; i++){
+        for (int j = 1; j <= n; j++){
+            if (s1[i - 1] == s2[j - 1]){
                 dp[i][j] = dp[i - 1][j - 1];
                 operations[i][j] = operations[i - 1][j - 1];
                 operations[i][j].push_back("Keep '" + string(1, s1[i - 1]) + "'");
             }
-            else
-            {
+            else{
                 int delete_cost = dp[i - 1][j] + cd;
                 int insert_cost = dp[i][j - 1] + ci;
                 int sub_cost = dp[i - 1][j - 1] + cs;
-                if (insert_cost <= delete_cost && insert_cost <= sub_cost)
-                {
+                if (insert_cost <= delete_cost && insert_cost <= sub_cost){
                     dp[i][j] = insert_cost;
                     operations[i][j] = operations[i][j - 1];
                     operations[i][j].push_back("Insert '" + string(1, s2[j - 1]) + "'");
                 }
-                else if (delete_cost <= insert_cost && delete_cost <= sub_cost)
-                {
+                else if (delete_cost <= insert_cost && delete_cost <= sub_cost){
                     dp[i][j] = delete_cost;
                     operations[i][j] = operations[i - 1][j];
                     operations[i][j].push_back("Delete '" + string(1, s1[i - 1]) + "'");
                 }
-                else
-                {
+                else{
                     dp[i][j] = sub_cost;
                     operations[i][j] = operations[i - 1][j - 1];
                     operations[i][j].push_back("Substitute '" + string(1, s1[i - 1]) + "' with '" + string(1, s2[j - 1]) + "'");
@@ -184,46 +155,36 @@ vector<string> explain_edit_distance(const string &s1, const string &s2, int ci,
     return operations[m][n];
 }
 
-// Spell checker function
-vector<string> spell_checker(const string &word, const vector<string> &dictionary, int ci, int cd, int cs, int max_distance = 2)
-{
-    if (word.empty() || dictionary.empty())
-    {
+vector<string> spell_checker(const string &word, const vector<string> &dictionary, int ci, int cd, int cs, int max_distance = 2){
+    if (word.empty() || dictionary.empty()){
         return {};
     }
 
-    // --- NEW: Deduplicate dictionary ---
     vector<string> unique_dict = dictionary;
     sort(unique_dict.begin(), unique_dict.end());
     auto last = unique(unique_dict.begin(), unique_dict.end());
     unique_dict.erase(last, unique_dict.end());
 
-    // --- NEW: Remove input word if present ---
     auto it = lower_bound(unique_dict.begin(), unique_dict.end(), word);
-    if (it != unique_dict.end() && *it == word)
-    {
+    if (it != unique_dict.end() && *it == word){
         unique_dict.erase(it);
     }
 
     vector<pair<string, int>> distances;
 
-    // Iterate over deduplicated dictionary
     for (const auto &dict_word : unique_dict)
     { // Changed from 'dictionary' to 'unique_dict'
-        if (abs((int)dict_word.length() - (int)word.length()) > max_distance)
-        {
+        if (abs((int)dict_word.length() - (int)word.length()) > max_distance){
             continue;
         }
 
         int dist = weighted_edit_distance(word, dict_word, ci, cd, cs, max_distance);
-        if (dist <= max_distance)
-        {
+        if (dist <= max_distance){
             distances.push_back({dict_word, dist});
         }
     }
 
-    if (distances.empty())
-    {
+    if (distances.empty()){
         return {};
     }
 
@@ -244,12 +205,11 @@ vector<string> spell_checker(const string &word, const vector<string> &dictionar
     return result;
 }
 
-// Print matrix with proper formatting
+
 void print_matrix(const vector<vector<int>> &matrix, const string &s1, const string &s2)
 {
     cout << "\nEdit Distance Matrix:" << endl;
 
-    // Print header row with epsilon and s2 characters
     cout << setw(4) << "#";
     for (char c : s2)
     {
@@ -257,7 +217,6 @@ void print_matrix(const vector<vector<int>> &matrix, const string &s1, const str
     }
     cout << endl;
 
-    // Print matrix rows with row labels
     for (size_t i = 0; i <= s1.length(); i++)
     {
         if (i == 0)
@@ -323,7 +282,6 @@ void run_cli()
             cs = stoi(input);
         }
 
-        // Validate costs
         if (ci <= 0 || cd <= 0 || cs <= 0)
         {
             cout << "Costs must be positive integers." << endl;

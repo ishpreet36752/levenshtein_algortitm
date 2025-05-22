@@ -22,10 +22,10 @@ int main() {
     cout << "kitten -> sitting: " << optimizedEditDistance("kitten", "sitting") << endl;
     cout << "flaw -> lawn: " << optimizedEditDistance("flaw", "lawn") << endl;
     cout << "algorithm -> logarithm: " << optimizedEditDistance("algorithm", "logarithm") << "\n\n";
-    cout << "--- Space Optimization ---\n";
-    cout << "1. Uses only two 1D arrays (prev and current row)\n";
-    cout << "2. Reduces space from O(n*m) to O(n)\n";
-    cout << "3. Maintains same time complexity O(n*m)\n";
+    cout << "Space Optimization\n";
+    cout << "-> Uses only two 1D arrays (prev and current row)\n";
+    cout << "-> Reduces space from O(n*m) to O(n)\n";
+    cout << "-> Maintains same time complexity O(n*m)\n";
     
     return 0;
 }
